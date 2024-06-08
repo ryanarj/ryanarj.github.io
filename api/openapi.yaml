@@ -5,7 +5,7 @@ info:
     This is a Pokedex API
   version: 1.0.11
 servers:
-  - url: https://ryanarj.github.io/pokedex/api/v1
+  - url: https://ryanarj.github.io/ryanarj.github.io/api/v1
 tags:
   - name: pokemon
     description: Everything about pokemons
@@ -142,8 +142,8 @@ components:
       xml:
         name: '##default'
   requestBodies:
-    Pet:
-      description: Pet object that needs to be added to the store
+    Pokemon:
+      description: Pokemon object that needs to be added to the store
       content:
         application/json:
           schema:

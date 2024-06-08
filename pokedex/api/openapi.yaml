@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: Pokedex - OpenAPI 3.0
+  description: |-
+    This is a Pokedex API
+  version: 1.0.11
+servers:
+  - url: https://ryanarj.github.io/pokedex/api/v1
+tags:
+  - name: pokemon
+    description: Everything about pokemons
+paths:
+  /pokemon:
+    post:
+      tags:
+        - pokemon
+      summary: Add a new pokemon
+      description: Add a new pokemon to the store
+      operationId: addPokemon
+      requestBody:
+        description: Create a new pokemon in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pokemon'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Pokemon'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pokemon'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+  /pokemon/{pokemonId}:
+    get:
+      tags:
+        - pokemon
+      summary: Find pokemon by ID
+      description: Returns a single pokemon
+      operationId: getPokemonById
+      parameters:
+        - name: pokemonId
+          in: path
+          description: ID of pokemon to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: pokemon not found
+
+components:
+  schemas:
+    Pokemon:
+      required:
+        - name
+        - type_1
+        - type_2
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: pikachu
+        type_1:
+          type: string
+          example: water
+        type_2:
+          type: string
+          example: water
+        hp:
+          type: integer
+          format: int64
+          example: 10
+        attack:
+          type: integer
+          format: int64
+          example: 10
+        defense:
+          type: integer
+          format: int64
+          example: 10
+        sp_atk:
+          type: integer
+          format: int64
+          example: 10
+        sp_def:
+          type: integer
+          format: int64
+          example: 10
+        generation:
+          type: integer
+          format: int64
+          example: 1
+        speed:
+          type: integer
+          format: int64
+          example: 10
+        legendary:
+          type: boolean
+          example: false
+      xml:
+        name: pokemon
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
+  requestBodies:
+    Pet:
+      description: Pet object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pokemon'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Pokemon'

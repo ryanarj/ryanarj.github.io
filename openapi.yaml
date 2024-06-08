@@ -3,7 +3,7 @@ info:
   title: Pokedex - OpenAPI 3.0
   description: |-
     This is a Pokedex API
-  version: 1.0.11
+  version: 0.0.1
 servers:
   - url: https://ryanarj.github.io/ryanarj.github.io/api/v1
 tags:
